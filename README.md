@@ -2,6 +2,7 @@
 
 ### Introduction 
 
+<div align="justify">
 In this reposity I create an end to end machine learning pipeline that predicts energy consumption, deploy this model using batch processing. In data science energy consumption forecasting can be modelled as a regression problem. There is a lot of economic, social, and environmental value that can come from the ability to accurately predict energy consumption. This project aims to research and understand the fundamentals of clean energy, energy generation, distribution and consumption and how energy consumption forecasting is cruicial in the Energy Sector. 
 
 
