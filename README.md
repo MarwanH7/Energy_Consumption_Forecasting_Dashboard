@@ -19,7 +19,13 @@
 ---
 ## 1. Introduction 
 <div align="justify">
-In the energy sector, demand forecasting is a very interesting and ongoing problem. In fact, it is actually a growing problem now, since there will be noise on the supply side of the grid as G7 countries continue to integrate more renewable energy sources to achieve net zero goals by 2030 and to 2050. This noise comes from the fact that these renewable energy sources such as wind, solar, nuclear are more volatile, with advancements and battery innovation this side will eventually become less volatile as well. It is very important for the grid to avoid blackouts; the supply and demand side have to be balanced.
+In the energy sector, demand forecasting presents a persistent and evolving challenge. With the increasing integration of renewable energy sources to achieve net-zero goals by 2030 to 2050, the issue has become even more pressing. The adoption of renewables such as wind, solar, and nuclear introduces greater variability into the supply side of the grid, contributing to its complexity. While advancements in battery technology are expected to mitigate this volatility in the future, it remains a current reality.
+
+Accurate and tailored demand forecasting is crucial in mitigating disruptions to the grid, reducing energy consumption, and minimizing carbon footprint. It not only enhances grid efficiency and cost savings but also facilitates renewable energy integration and enables informed decision-making and resource allocation. Most importantly, it improves real-time demand balancing to prevent blackouts. The benefits of accurate demand forecasting are numerous and far-reaching.
+
+From a business perspective, this project aims to evaluate the viability of a peak demand prediction service for heavy power users in Ontario and provide a simple proof of concept. From a technical standpoint, it seeks to develop a robust data engineering pipeline incorporating best practices, along with an end-to-end MLOps framework for model monitoring and tracking.
+
+
 
 ---
 
