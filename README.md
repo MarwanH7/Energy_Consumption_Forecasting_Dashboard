@@ -1,69 +1,76 @@
-# Time Series Forecasting (Energy Consumption)
+# Energy Consumption Peak Demand Forecasting Dashboard
 
-### Introduction 
 
+## Table of Contents
+1. [Introduction](#1-introduction)
+2. [Business Proposal | The Problem](#2-business-proposal--the-problem)
+    - [Customer Classification](#21-customer-classification)
+    - [Customer Bill Calculation Example](#22-customer-bill-calculation-example)
+    - [More about the Problem](#23-more-about-the-problem)
+3. [Proposed Solution](#3-proposed-solution)
+4. [Dashboard Service Technicals](#4-dashboard-service-technicals)
+5. [Flow Diagram](#5-flow-diagram)
+6. [Full Data and Machine Learning Pipeline](#6-full-data-and-machine-learning-pipeline)
+7. [Features to Add in the Future](#7-features-to-add-in-the-future)
+8. [Reproducibility](#8-reproducibility)
+9. [Business Viability Conclusion](#9-business-viability-conclusion)
+10. [Acknowledgments](#10-acknowledgments)
+
+---
+## 1. Introduction 
 <div align="justify">
-In this reposity I create an end to end machine learning pipeline that predicts energy consumption, deploy this model using batch processing. In data science energy consumption forecasting can be modelled as a regression problem. There is a lot of economic, social, and environmental value that can come from the ability to accurately predict energy consumption. This project aims to research and understand the fundamentals of clean energy, energy generation, distribution and consumption and how energy consumption forecasting is cruicial in the Energy Sector. 
+In the energy sector, demand forecasting is a very interesting and ongoing problem. In fact, it is actually a growing problem now, since there will be noise on the supply side of the grid as G7 countries continue to integrate more renewable energy sources to achieve net zero goals by 2030 and to 2050. This noise comes from the fact that these renewable energy sources such as wind, solar, nuclear are more volatile, with advancements and battery innovation this side will eventually become less volatile as well. It is very important for the grid to avoid blackouts; the supply and demand side have to be balanced.
 
+---
 
-## Readme Table of Contents 
+## 2. Business Proposal|The problem
+### 2.1 Customer Classification 
+If you are a large electricity user, large is defined as a user using average monthly maximum hourly demand of 1MW and above and are considered Class A customers. They are able to curtail electricity. For those large users, 50-60% of their electricity bill cost is determined by their consumption during those 5 peak hours. That is called Global Adjustment. GA is used to cover the cost of building new electricity infrastructure in the province, regulated rates paid to electricity suppliers under contract, and the costs of delivering the province’s energy efficiency and conservation programs. Global Adjusted (GA) is calculated using the Class A users energy consumption on those peak 5 days which is known as a peak demand factor (PDF). Here is how the calculation works:
 
-1. Project Objectives
+### 2.2 Customer Bill Calculation Example
+There is a system-wide GA cost for a given month, for example, let's say for the month of May it's **999.6M**.
 
-  1. Domain knowledge and problem statment
-     
-  2. Technical
+The class A large electricity client has a **Peak Demand Factor** of **0.00017749**.
 
-2. Flow Diagram
-3. Full Machine learning Pipeline
-4. Features to add in the future
-5. Repreducibility
-6. Aknowledgments
+His GA monthly charge is 999.6M * 0.00017749 = $ 177,419 monthly, around $2.1M.
 
+The Peak Demand Factor is calculated as follows:
 
+The Class A **clients consumption** during the top 5 demand peak hours (MWh) divided by the sum of the **top 5 system-wide Consumption Peaks (MWh)**.
 
+### 2.3 More about the problem 
+If you are interested in how GA works, more information can be found [here](https://www.ieso.ca/en/Sector-Participants/Settlements/Global-Adjustment-and-Peak-Demand-Factor)
 
-### Project Objectives 
+---
 
-#### 1. Domain Knowledge and problem statement Overview
+## 3. Proposed Solution
+**The project aims**
+The project aims to reduce the PDF value by accurately predicting the top 5 peak demand hours allowing users to decrease their consumption on those predicted days to reduce their GA contribution. The user will see the 5-day prediction uploaded automatically to the **Energy_Consumption_Forecasting_Dashboard** between late May and early October. The Dashboard services will also come with real-time forecasting for the next day's demand and 7 days ahead.
 
-  Research and understand the problem 
-  Research and understand potential and applied solutions 
-  Use research findings to create featrues to improve models predicitve power 
-  
-  example weather conditions, public holidays, economic indicators, events like sports tournaments or concerts
-  
-  
-  Energy consumption forecasting advantages include but are not limited to 
-  
-  * Reducing energy consumption and carbon footprint
-  * Improved Grid Effeciency and therefore increase cost savings
-  * Inhnaced renewable energy integration
-  * Informed decision making and resource allocation
-  * Real time demand balancing which helps prevent imbalances and reduce the risk of blackouts
-  
+1. **Time Series Forecasting Service:(Business)**
+   - Predicts day-ahead and 7-day-ahead energy consumption.
+   - Targeted towards heavy electrical power users based in Ontario. (This is similar to IESO [peak tracker](https://ieso.ca/Sector-Participants/Settlements/Peak-Tracker) which forecasts, 1 day and 6 days ahead. Then lists the top 10 peak demand hours to help large utilities calculate their PDF and GA)
 
+2. **Peak Demand Forecasting service:(Business)**
+   - Predicts energy consumption for the 5 peak days during the summer to help businesses mitigate the Global Adjustment (GA) part of the bill.
+   - Targeted towards Ontario-based users with a daily electrical an hourly monthly average demand of 1MW or more. (Class A) 
 
-#### 2. Technical Overview 
+3. **Full Automated Dashboard. (Time series forecasting, Peak demand forecasting):**
+   - Develop an end-to-end data pipeline and machine learning model pipeline for energy consumption forecasting.
+   - The final product is a dashboard accessible via Google Looker Studio, tailored for internal teams of large electricity users.
 
-In this project, the goal is to build an end-to-end ML project and implement MLOps process and best practices. The project is structured into six main components:
+This project is meant to be a proof of concept to assess if this service is viable both from a technical standpoint and business. For that to be achieved:
 
-1. **Dataset**: Acquire and prepare the dataset.
-2. **Train a model**: Train a model using the dataset and track the experimentation process.
-3. **Create a model training pipeline**: Set up a pipeline for training the model.
-4. **Deploy the model**: Deploy the model using batch processing, web services, or streaming.
-5. **Monitor the model's performance**: Keep track of the model's performance over time.
-6. **Follow best practices**, including:
-   - Testing (unit and integration testing).
-   - Python linting and formatting.
-   - Implementing pre-commit hooks and makefiles.
-   - Setting up CI/CD using GitHub Actions.
-   - Implementing Infrastructure as Code (Terraform).
+1. The model has to be good enough to make the business model viable
+    - Very High accuracy predictions for peak demand days (otherwise, reimbursements from Large electricity user for wrong prediction out of/5 will eat at cashflow and revenue). Make consistent predictions to mitigate financial risk 
+    - It has to perform better than base model predictions (Highest temperature/ Highest humidity are used)
 
+2. Adhere to Data engineering, Machine learning, Mlops fundamentals and best practices to build robust pipelines and final product.
 
-#### Technologies 
+---
 
-**Technologies Used:**
+## 4. Dashboard Service Technicals
+### Technologies Used:
 
 - **Cloud**: AWS, GCP, Azure, or others
 - **Experiment tracking tools**: MLFlow, Weights & Biases, and more.
@@ -72,22 +79,44 @@ In this project, the goal is to build an end-to-end ML project and implement MLO
 - **CI/CD**: GitHub Actions, Gitlab CI/CD, and more.
 - **Infrastructure as Code (IaC)**: Terraform, Pulumi, Cloud Formation, and more.
 
+#### Data 
 
+Ontario Demand data: 
+Ontario Price data: 
+Population 
+gdp
+holidays
+weather 
 
+---
 
+## 5. Flow Diagram
+...
 
+---
 
+## 6. Full Data and Machine Learning Pipeline
+...
 
+---
 
+## 7. Features to add in the future
+...
 
+---
 
+## 8. Reproducibility
+...
 
+---
 
+## 9. Business Viability Conclusion
+...
 
+---
 
-
-
-
-
+## 10. Acknowledgments
+...
 
 This project is done after going through the course material from [mlops-zoomcamp](https://github.com/MarwanH7/mlops-zoomcamp)
+
