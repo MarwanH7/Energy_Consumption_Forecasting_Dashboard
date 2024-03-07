@@ -50,7 +50,7 @@ If you are interested in how GA works, more information can be found [here](http
 ---
 
 ## 3. Proposed Solution
-**The project aims**
+
 The project aims to reduce the PDF value by accurately predicting the top 5 peak demand hours allowing users to decrease their consumption on those predicted days to reduce their GA contribution. The user will see the 5-day prediction uploaded automatically to the **Energy_Consumption_Forecasting_Dashboard** between late May and early October. The Dashboard services will also come with real-time forecasting for the next day's demand and 7 days ahead.
 
 1. **Time Series Forecasting Service:(Business)**
